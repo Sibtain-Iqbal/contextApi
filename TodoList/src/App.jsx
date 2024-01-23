@@ -7,10 +7,10 @@ function App() {
   const [Todos, SetTodo] = useState([])
 
   const addTodo = (todo) => {
-
     SetTodo((prev) => [{ id: Date.now(), ...todo }, ...prev])
 
   }
+
   const updateTodo = (todo, id) => {
 
     SetTodo((prev) => prev.map((prevtodo) => prevtodo.id === id ? todo : prevtodo))
@@ -37,22 +37,26 @@ function App() {
 
   }
 
-  useEffect(() => {
+ 
+  // local storagee 
 
-    const todos = JSON.parse(localStorage.getItem("todos"))
-    console.log(todos);
+  useEffect(()=>{
+  const todos = JSON.parse(localStorage.getItem("todos"))
 
-    if (todos && todos.length > 0) {
-      SetTodo(todos)
+  if(todos && todos.length>0 )
 
-    }
+ SetTodo(todos)
 
   },[])
-  useEffect(()=>{
 
-    localStorage.setItem("todos",JSON.stringify(Todos))
+  useEffect(()=>{
     
-  },[Todos])
+    localStorage.setItem("todos",JSON.stringify(todos))
+
+  },[todos])
+
+  
+
 
   return (
     <TodoProvider value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}>
