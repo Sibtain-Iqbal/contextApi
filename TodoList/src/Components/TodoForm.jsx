@@ -8,6 +8,7 @@ function TodoForm() {
     const add = (e) => {
 
         e.PreventDefault()
+        console.log(add);
 
         if (!todo) return
         addTodo({
